@@ -1,1 +1,0 @@
-<jsp:forward page="/email/home"></jsp:forward>
