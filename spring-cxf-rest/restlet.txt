@@ -1,0 +1,155 @@
+package com.demo.improve.servlet;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.restlet.data.Form;
+import org.restlet.data.MediaType;
+import org.restlet.data.Method;
+import org.restlet.data.Preference;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+
+import com.demo.improve.bean.Contact;
+
+public class Test {
+
+	public static void main(String[] args) {
+		try {
+			Contact contact = new Contact("Danh", "congdanh910@gmail.com","0947579583", "Title", "Hello Danh");
+			// Reference ref = new
+			// Reference("http://admin:admin@localhost:4502/bin/test");
+			// String[] userinfo = ref.getUserInfo().split(":"); //
+			// "username:password"
+			// String username = userinfo[0];
+			// String password = userinfo[1];
+			// ClientResource resource = new ClientResource(ref);
+			// resource.setMethod(Method.POST);
+			// resource.setChallengeResponse(ChallengeScheme.HTTP_BASIC,
+			// username, password);
+			
+			//-----------------------------------------------------------
+			Form form = new Form();
+			form.add("name", "Danh");
+			form.add("email", "congdanh910");
+			form.add("phone", "0947579583");
+			form.add("title", "Hello Mule Esb");
+			form.add("msg", "Demo Http with Mule http and insert into Mongodb");
+//			ClientResource resource = new ClientResource("http://localhost:8081/api/contacts");
+//			resource.setMethod(Method.POST);
+//			Representation r = resource.post(form);
+//			System.out.println(r.getText());
+			//----------------------------------------------------------
+
+			//-----------------------------------------------------------
+			Form form2 = new Form();
+			form2.add("author", "Danh");
+			form2.add("title", "congdanh910@gmail.com");
+			form2.add("price", "123456");
+			ClientResource resource2 = new ClientResource("http://localhost:8081/cxf-rest/rs/user-service/users");
+			
+//			Form headers = (Form)resource2.getRequestAttributes().get("org.restlet.http.headers");
+//			if (headers == null) {
+//			    headers = new Form();
+//			    resource2.getRequestAttributes().put("org.restlet.http.headers", headers);
+//			}
+//			headers.add("yourHeaderName", yourHeaderValue);
+			
+//			resource2.getClientInfo().getAcceptedMediaTypes()
+//					.add(new Preference<MediaType>(MediaType.APPLICATION_JSON));
+//			resource2.setMethod(Method.GET);
+//			
+//			System.out.println(ToStringBuilder.reflectionToString(resource2.getClientInfo()));
+//			Representation r2 = resource2.get();
+//			System.out.println(r2.getText());
+			//-----------------------------------------------------------
+			sendPost(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void sendPost(String urlParameters) throws Exception {
+		String url = "http://localhost:8081/cxf-rest/rs/user-service/users";
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		// add reuqest header
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+		con.setRequestProperty("Accept", "application/json");
+
+		// Send post request
+		if(StringUtils.isNotBlank(urlParameters)){
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(urlParameters);
+			wr.flush();
+			wr.close();
+		}
+
+		int responseCode = con.getResponseCode();
+//		System.out.println("\nSending 'POST' request to URL : " + url);
+//		System.out.println("Post parameters : " + urlParameters);
+//		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+		// print result
+		System.out.println(response.toString());
+
+	}
+}
+
+class Test1 implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String author;
+	private String title;
+	private String price;
+
+	public Test1(String author, String title, String price) {
+		this.author = author;
+		this.title = title;
+		this.price = price;
+	}
+
+	public Test1() {
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+}
