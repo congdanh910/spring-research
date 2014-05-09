@@ -1,1 +1,2 @@
 http://www.27programs.com/2013/11/09/building-restful-web-services-apache-cxf-spring/
+http://java-success.blogspot.com/2012/10/restful-web-service-tutorial-with.html
