@@ -8,8 +8,10 @@
     
     <!-- Spring manage ServiceBean -->
     <bean id="personServ" class="com.unitedcoders.demo.PersonServiceImpl" />
+    <bean id="accountServ" class="com.unitedcoders.demo.AccountServiceImpl" />
 
     <!-- JAX-WS Service Endpoint -->    
     <jaxws:endpoint id="personService" implementor="#personServ" address="/personService" />
+    <jaxws:endpoint id="accountService" implementor="#accountServ" address="/accountService" />
     
 </beans>
