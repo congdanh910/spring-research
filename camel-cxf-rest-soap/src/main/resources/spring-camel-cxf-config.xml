@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/cxf 
+       http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+       
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- Start CXF Configuration
+	<bean id="wsPersonService" class="com.demo.apache.cxf.WSPersonService" />
+	<jaxrs:server id="hello" address="/hello">
+		<jaxrs:serviceBeans>
+			<ref bean="wsPersonService" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+	 End CXF Configuration -->
+
+	<!-- Start Camel Configuration -->
+	
+	<bean id="personRouter" class="com.demo.apache.camel.WSPersonRoutes"/>
+
+    <camel:camelContext id="service" trace="true" xmlns="http://camel.apache.org/schema/spring">
+        <camel:routeBuilder ref="personRouter"/>
+    </camel:camelContext>
+    
+	<!--End Camel Configuration-->
+</beans>
+
+
+
+<!-- 
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxrs 
+		http://cxf.apache.org/schemas/jaxrs.xsd 
+		http://cxf.apache.org/transports/http/configuration 
+		http://cxf.apache.org/schemas/configuration/http-conf.xsd
+		http://camel.apache.org/schema/spring/camel-spring.xsd
+		http://camel.apache.org/schema/cxf/camel-cxf.xsd
+		http://camel.apache.org/schema/cxf 
+		http://camel.apache.org/schema/cxf/camel-cxf.xsd"
+	default-lazy-init="false">
+
+ -->
