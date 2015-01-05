@@ -1,0 +1,4 @@
+1. For vn case
+	http://localhost:8080/cxf-camel-poc/cxf/vn/getAllUser
+2. For us case
+	http://localhost:8080/cxf-camel-poc/cxf/us/getAllUser
