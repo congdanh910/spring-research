@@ -21,7 +21,7 @@ public class Main {
 //        context.refresh();
 
         // studentService
-        StudentService studentService = (StudentService)context.getBean("studentService");
+        StudentService studentService = context.getBean("studentService", StudentService.class);
 
         // entity
         Student st = new Student("Danh Ho", "Tien Giang", "congdanh910@gmail.com", new Date());
