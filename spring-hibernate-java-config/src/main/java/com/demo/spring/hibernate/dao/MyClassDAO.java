@@ -6,5 +6,5 @@ import com.demo.spring.hibernate.model.MyClass;
  * Created by CongDanh on 7/25/15.
  */
 public interface MyClassDAO extends GenericDAO<MyClass, Long> {
-    public MyClass getStudentsOfClass(long id);
+    public MyClass getClassWithStudents(long id);
 }

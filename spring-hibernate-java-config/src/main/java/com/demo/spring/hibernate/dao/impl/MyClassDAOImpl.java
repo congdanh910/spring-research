@@ -23,7 +23,7 @@ public class MyClassDAOImpl extends GenericDAOImpl<MyClass, Long> implements MyC
         super(sessionFactory);
     }
 
-    public MyClass getStudentsOfClass(long id) {
+    public MyClass getClassWithStudents(long id) {
         MyClass myClass = (MyClass) getSession().createCriteria(MyClass.class).add(Restrictions.idEq(id)).uniqueResult();
         if (myClass != null) {
             Hibernate.initialize(myClass.getStudents());

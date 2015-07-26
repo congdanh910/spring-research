@@ -6,8 +6,8 @@ import com.demo.spring.hibernate.model.Student;
 import com.demo.spring.hibernate.services.MyClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -48,7 +48,7 @@ public class MyClassServiceImpl implements MyClassService {
         myClassDAO.clear();
     }
 
-    public MyClass getStudentsOfClass(long id) {
-        return myClassDAO.getStudentsOfClass(id);
+    public MyClass getClassWithStudents(long id) {
+        return myClassDAO.getClassWithStudents(id);
     }
 }
