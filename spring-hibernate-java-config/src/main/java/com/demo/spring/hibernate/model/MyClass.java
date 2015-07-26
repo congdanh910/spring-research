@@ -1,5 +1,7 @@
 package com.demo.spring.hibernate.model;
 
+import org.hibernate.LazyInitializationException;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,20 +11,23 @@ import java.util.List;
  * Created by danh.ho on 24/07/2015.
  */
 @Entity
-@Table(name = "class")
+@Table(name = "classes")
 public class MyClass implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<Student>();
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
 
-    public MyClass(String name, List<Student> students, Teacher teacher) {
+    public MyClass(String name) {
         this.name = name;
-        this.students = students;
-        this.teacher = teacher;
     }
 
     public MyClass() {
@@ -59,4 +64,14 @@ public class MyClass implements Serializable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
+    @Override
+    public String toString() {
+        try {
+            return this.name + ", [" + this.students + "]" + ", [" + this.teacher + "]";
+        } catch (LazyInitializationException ex) {
+            return this.name + ", [Students is NULL --> Lazy loading is false!]" + ", [Teacher is NULL --> Lazy loading is false!]";
+        }
+    }
 }
+

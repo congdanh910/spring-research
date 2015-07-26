@@ -8,6 +8,7 @@ import java.util.Date;
  * Created by danh.ho on 24/07/2015.
  */
 @Entity
+@Table(name = "teachers")
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,5 +59,10 @@ public class Teacher implements Serializable {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
