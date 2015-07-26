@@ -115,7 +115,7 @@ public class Main {
             LAZY: More coding, but much more efficient
 
          */
-        MyClass classLoading = myClassService.getStudentsOfClass(1L);
+        MyClass classLoading = myClassService.getClassWithStudents(1L);
         System.out.println(classLoading);
 
         for (Student student : classLoading.getStudents()) {
