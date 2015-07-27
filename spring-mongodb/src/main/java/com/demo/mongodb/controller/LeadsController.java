@@ -20,28 +20,29 @@ import com.demo.mongodb.repository.LeadsRepository;
 @RequestMapping("/leads")
 public class LeadsController {
 
-	@Autowired
-	private LeadsRepository repository;
-	
-	@RequestMapping("/find/{firstname}")
-	public void findByFirstname(@PathVariable("firstname") String firstname, HttpServletResponse response) throws IOException{
-		System.out.println("Firstname :  " + firstname);
-		List<Lead> lead = repository.findByFirstname(firstname);
-		for (Lead l : lead) {
-			response.getWriter().write(ToStringBuilder.reflectionToString(l) + "\n");
-		}
-	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public void findByFirstname(HttpServletResponse response) throws IOException{
-		Lead lead = new Lead();
-		lead.setFirstname("Khanh");
-		lead.setLastname("Dang");
-		lead.setAge(27);
-		lead.setBirthday(new Date());
-		lead.setStatus(true);
-		lead.setIncome(13.5);
-		repository.save(lead);
-		response.getWriter().write("Save lead successful!!!");
-	}
+    @Autowired
+    private LeadsRepository repository;
+
+    @RequestMapping("/find/{firstname}")
+    public void findByFirstname(@PathVariable("firstname") String firstname, HttpServletResponse response) throws IOException {
+        System.out.println("Firstname :  " + firstname);
+        List<Lead> lead = repository.findByFirstname(firstname);
+        for (Lead l : lead) {
+            response.getWriter().write(ToStringBuilder.reflectionToString(l) + "\n");
+        }
+    }
+
+    @RequestMapping(value = "/add/{firstName}/{lastName}/{age}", method = RequestMethod.GET)
+    public void addLead(HttpServletResponse response, @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName,
+                                @PathVariable("age") int age) throws IOException {
+        Lead lead = new Lead();
+        lead.setFirstname(firstName);
+        lead.setLastname(lastName);
+        lead.setAge(age);
+        lead.setBirthday(new Date());
+        lead.setStatus(true);
+        lead.setIncome(13.5);
+        repository.save(lead);
+        response.getWriter().write("Save lead successful!!!");
+    }
 }

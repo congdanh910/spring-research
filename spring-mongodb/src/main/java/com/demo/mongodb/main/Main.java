@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("mongodb-system-servlet.xml");
-        System.out.println(ctx);
+
     }
 
 }
