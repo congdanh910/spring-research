@@ -11,6 +11,9 @@
 	http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
+    <context:annotation-config/>
+    <context:component-scan base-package="com.demo.mongodb"/>
+
     <mongo:mongo host="127.0.0.1" port="27017">
         <mongo:options connections-per-host="4"
                        connect-timeout="1000"
@@ -22,9 +25,6 @@
     </mongo:mongo>
     <mongo:db-factory dbname="db_test"/>
     <mongo:repositories base-package="com.demo.mongodb.repository"/>
-
-    <context:annotation-config/>
-    <context:component-scan base-package="com.demo.mongodb"/>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

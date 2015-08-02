@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.demo.mongodb.repository.LeadRepository;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.demo.mongodb.model.Lead;
-import com.demo.mongodb.repository.LeadsRepository;
 
 @Controller
 @RequestMapping("/leads")
 public class LeadsController {
 
     @Autowired
-    private LeadsRepository repository;
+    private LeadRepository repository;
 
     @RequestMapping("/find/{firstname}")
     public void findByFirstname(@PathVariable("firstname") String firstname, HttpServletResponse response) throws IOException {
@@ -34,7 +34,7 @@ public class LeadsController {
 
     @RequestMapping(value = "/add/{firstName}/{lastName}/{age}", method = RequestMethod.GET)
     public void addLead(HttpServletResponse response, @PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName,
-                                @PathVariable("age") int age) throws IOException {
+                        @PathVariable("age") int age) throws IOException {
         Lead lead = new Lead();
         lead.setFirstname(firstName);
         lead.setLastname(lastName);

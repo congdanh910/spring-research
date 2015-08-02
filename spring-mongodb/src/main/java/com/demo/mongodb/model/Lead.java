@@ -72,4 +72,8 @@ public class Lead {
         this.income = income;
     }
 
+    @Override
+    public String toString() {
+        return this.firstname + " " + this.lastname + ", " + this.id;
+    }
 }
