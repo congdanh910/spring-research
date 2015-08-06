@@ -19,7 +19,7 @@ public class TestImpl extends GenericDAOImpl<Test, Integer> implements TestDAO {
     public void testAop(Test test, boolean exception) throws TestException {
         getSession().saveOrUpdate(test);
         if (exception) {
-            throw new TestException("This is testing for Aop transaction management!!!");
+            throw new TestException("This exception is testing for Aop transaction management!!!");
         }
     }
 }
