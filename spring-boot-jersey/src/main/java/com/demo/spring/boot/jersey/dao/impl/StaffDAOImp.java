@@ -20,7 +20,7 @@ public class StaffDAOImp implements StaffDAO {
 
     private static final String TABLE_NAME = "staffs";
     @Autowired
-    @Qualifier("dropwizardJdbcTemplate")
+    @Qualifier("dropwizardJdbcTemplate") // @Qualifier("springBootJdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
     @Override
