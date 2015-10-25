@@ -59,8 +59,12 @@ public class User implements Serializable {
 		this.name = userForm.getEmail();
 		this.email = userForm.getEmail();
 		this.role = Role.valueOf(userForm.getRole());
-		this.createdAt = new Timestamp(new Date().getTime());
-		this.updatedAt = new Timestamp(new Date().getTime());
+		if (StringUtils.isNotBlank(userForm.getId())) {
+			this.updatedAt = new Timestamp(new Date().getTime());
+		} else {
+			this.createdAt = new Timestamp(new Date().getTime());
+			this.password = userForm.getPassword();
+		}
 	}
 
 	public User(String id, String username, String password, String email, String name, Timestamp createdAt,

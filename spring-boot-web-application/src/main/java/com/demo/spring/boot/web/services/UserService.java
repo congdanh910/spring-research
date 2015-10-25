@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import com.demo.spring.boot.web.model.CurrentUser;
 import com.demo.spring.boot.web.model.User;
 
-public interface UserService extends UserDetailsService{
+public interface UserService extends UserDetailsService {
 
 	public List<User> listAll();
 
 	public User findById(String id);
-	
-	public void saveOrUpdate(User user);
+
+	public User saveOrUpdate(User user) throws Exception;
 
 	public User findOneByUsername(String username);
 

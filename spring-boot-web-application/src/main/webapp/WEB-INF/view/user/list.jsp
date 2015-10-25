@@ -17,6 +17,7 @@
 			<th><spring:message code="user.list.table.username" /></th>
 			<th><spring:message code="user.list.table.email" /></th>
 			<th><spring:message code="user.list.table.role" /></th>
+			<th><spring:message code="user.list.table.update" /></th>
 		</tr>
 		<c:forEach var="user" items="${users}">
 			<tr>
@@ -24,11 +25,18 @@
 				<td>${user.username}</td>
 				<td>${user.email}</td>
 				<td>${user.role}</td>
+				<td align="center">
+					<a href="<c:url value="/user/update/${user.id}" />">
+						<spring:message code="user.list.table.update" />
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<div style="float: left; padding-top: 10px;">
-		<a href="<c:url value="/user/create" />">Create</a>
+		<a href="<c:url value="/user/create" />">
+			<spring:message code="user.list.table.create" />
+		</a>
 	</div>
 </body>
 </html>

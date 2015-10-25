@@ -1,11 +1,20 @@
 package com.demo.spring.boot.web.form;
 
 public class UserForm {
+	private String id;
 	private String name;
 	private String username;
 	private String password;
 	private String email;
 	private String role;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

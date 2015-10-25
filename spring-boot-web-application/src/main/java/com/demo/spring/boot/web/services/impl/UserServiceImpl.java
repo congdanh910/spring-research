@@ -2,7 +2,9 @@ package com.demo.spring.boot.web.services.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,20 @@ import com.demo.spring.boot.web.model.CurrentUser;
 import com.demo.spring.boot.web.model.Role;
 import com.demo.spring.boot.web.model.User;
 import com.demo.spring.boot.web.services.UserService;
+import com.demo.spring.boot.web.utils.RedisKeysUtil;
+import com.google.gson.Gson;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 
+	private final Gson gson = new Gson();
+
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
 
 	@Override
 	public List<User> listAll() {
@@ -28,12 +37,25 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(String id) {
-		return userDao.findById(id, true);
+		String userInRedis = redisTemplate.opsForValue().get(RedisKeysUtil.createUserKey(id));
+		User find = null;
+		if (StringUtils.isNotBlank(userInRedis)) {
+			find = gson.fromJson(userInRedis, User.class);
+		} else {
+			find = userDao.findById(id, true);
+			if (find != null) {
+				redisTemplate.opsForValue().set(RedisKeysUtil.createUserKey(find.getId()), gson.toJson(find));
+			}
+		}
+		return find;
 	}
-	
+
 	@Override
-	public void saveOrUpdate(User user) {
-		userDao.saveOrUpdate(user);
+	@Transactional(rollbackFor = Exception.class)
+	public User saveOrUpdate(User user) throws Exception {
+		User created = userDao.saveOrUpdate(user);
+		redisTemplate.opsForValue().set(RedisKeysUtil.createUserKey(created.getId()), gson.toJson(created));
+		return created;
 	}
 
 	@Override
