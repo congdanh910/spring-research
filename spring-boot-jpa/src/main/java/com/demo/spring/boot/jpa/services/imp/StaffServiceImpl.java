@@ -1,5 +1,7 @@
 package com.demo.spring.boot.jpa.services.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -27,10 +29,15 @@ public class StaffServiceImpl implements StaffService {
 		return staffRepo.findOne(id);
 	}
 
-  @Override
-  @Transactional(readOnly = false)
-  public Integer setFirstNameForStaff(long id, String firstName) {
-    return staffRepo.setFirstNameForStaff(id, firstName);
-  }
+	@Override
+	@Transactional(readOnly = false)
+	public Integer setFirstNameForStaff(long id, String firstName) {
+		return staffRepo.setFirstNameForStaff(id, firstName);
+	}
+
+	@Override
+	public List<Staff> findByFirstName(String firstName) {
+		return staffRepo.findByFirstName(firstName);
+	}
 
 }
