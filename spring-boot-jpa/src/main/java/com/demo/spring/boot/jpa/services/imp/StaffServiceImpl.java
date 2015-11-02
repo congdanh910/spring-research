@@ -27,4 +27,10 @@ public class StaffServiceImpl implements StaffService {
 		return staffRepo.findOne(id);
 	}
 
+  @Override
+  @Transactional(readOnly = false)
+  public Integer setFirstNameForStaff(long id, String firstName) {
+    return staffRepo.setFirstNameForStaff(id, firstName);
+  }
+
 }
