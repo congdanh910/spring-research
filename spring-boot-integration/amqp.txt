@@ -1,0 +1,12 @@
+Context of project :
+	1. User will submit a question to server.
+	2. The server will not process this question at this time BUT the question will be stored somewhere
+	3. Background processes will get and handle these questions
+	
+Flow of project :
+	1. Users submitted the questions
+	2. These questions ( messages ) will be published to Queue (spring-boot-integration)
+	3. Spring-integration will get the messages from Queue and handle with business rules
+	4. Save the messages to database ( mysql )
+	
+	The questions ==> Queue ==> Background process ==> Filter ==> (accept ==> Save database, reject ==> save to file)	 	
