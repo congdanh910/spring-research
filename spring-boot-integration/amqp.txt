@@ -9,4 +9,4 @@ Flow of project :
 	3. Spring-integration will get the messages from Queue and handle with business rules
 	4. Save the messages to database ( mysql )
 	
-	The questions ==> Queue ==> Background process ==> Filter ==> (accept ==> Save database, reject ==> save to file)	 	
+	The questions ==> Queue ==> Background process ==> Filter ==> (accept ==> Save database, reject ==> save to file)

@@ -12,6 +12,6 @@ public class GetQuestionFromQueue {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GetQuestionFromQueue.class, args);
-		// System.exit(0);
+//		 System.exit(0);
 	}
 }

@@ -59,12 +59,7 @@ public class FlowsConfig {
 	@Bean
 	public IntegrationFlow processQuestionFlow() {
 		return IntegrationFlows.from("processQuestion")
-//				.transform(Transformers.objectToString())
 				.handle("questionDao", "handle")
-//				.handle((m) -> {
-//					System.out.println(ToStringBuilder.reflectionToString(m));
-//					 System.out.println("Hello : " + m.getPayload());
-//				})
 				.get();
 	}
 
