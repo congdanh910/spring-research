@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  tomcat:
+    max-threads: 400
+    max-connections: 2000
+    min-spare-threads: 100
+appversion: @project.version@
+
+spring:
+  couchbase:
+    bootstrap-hosts: localhost
+    bucket:
+      name: admin
+      password: 123456
+    env:
+      timeouts:
+        query: 20000ms
+        socket-connect: 2000ms
+        view: 20000ms
+      endpoints:
+        queryservice:
+          min-endpoints: 10
+          max-endpoints: 50
+        viewservice:
+          min-endpoints: 10
+          max-endpoints: 50
+  data:
+    couchbase:
+      auto-index: true
+
+graphql:
+  servlet:
+    enabled: true
+    mapping: /graphql
+
+graphiql:
+  enabled: true
+  endpoint: /graphql
