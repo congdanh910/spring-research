@@ -1,5 +1,9 @@
 package com.example.couchbase.request;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class PersonCreateModel {
     private String firstName;
     private String lastName;
@@ -18,5 +22,9 @@ public class PersonCreateModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public static void main (String[] args) {
+        Map<String, Integer> a = new HashMap<>();
     }
 }

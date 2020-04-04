@@ -6,7 +6,10 @@ import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Document
 public class Person {
@@ -29,6 +32,9 @@ public class Person {
 
     @Field
     private Date updatedAt;
+
+    @Field
+    private List<Map<String, String>> certifications = new ArrayList<>();
 
     public Person(@NotNull String firstName, @NotNull String lastName, @NotNull Date createdAt, Date updatedAt) {
         this.firstName = firstName;
@@ -85,5 +91,13 @@ public class Person {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Map<String, String>> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<Map<String, String>> certifications) {
+        this.certifications = certifications;
     }
 }

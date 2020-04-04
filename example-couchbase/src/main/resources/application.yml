@@ -10,7 +10,7 @@ spring:
   couchbase:
     bootstrap-hosts: localhost
     bucket:
-      name: admin
+      name: default
       password: 123456
     env:
       timeouts:

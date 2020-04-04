@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @N1qlPrimaryIndexed
 @ViewIndexed(designDoc = "person")
 @Repository
-public interface PersonRepository extends PagingAndSortingRepository<Person, String> {
+public interface PersonRepository extends PagingAndSortingRepository<Person, String>, CustomPersonRepository {
 }
