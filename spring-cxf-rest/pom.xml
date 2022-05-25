@@ -282,7 +282,7 @@
 	<properties>
 		<maven.test.skip>false</maven.test.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<spring.amqp.version>1.2.0.RELEASE</spring.amqp.version>
 		<hibernate.version>3.6.9.Final</hibernate.version>
 		<rabbitmq.version>3.1.4</rabbitmq.version>
